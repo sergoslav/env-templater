@@ -12,7 +12,7 @@ The program opens the source file and creates a new file. It then iterates over 
 
 ## Go Install
 ```bash
-go install https://github.com/sergoslav/env-templater@latest
+go install github.com/sergoslav/env-templater@latest
 ```
 
 ## Usages Example
