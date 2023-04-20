@@ -11,7 +11,7 @@ import (
 func main() {
 	// Получаем имена файлов и префикс из аргументов командной строки
 	if len(os.Args) != 4 {
-		fmt.Println("Usage: go run env-templater.go <source_file> <dest_file> <prefix>")
+		fmt.Println("Usage: env-templater <source_file> <dest_file> <prefix>")
 		os.Exit(1)
 	}
 
