@@ -17,7 +17,7 @@ go install github.com/sergoslav/env-templater@latest
 
 ## Usages Example
 
-.env.template file:
+Source `.env.template` file:
 ```env
 APP_NAME="My App"
 #DB Contigurations
@@ -32,4 +32,16 @@ DB_PASSWORD=password
 Run:
 ```bash
 $ env-templater .env.template .env dev-
+```
+
+Result `.env` file:
+```env
+APP_NAME="My App"
+#DB Contigurations
+DB_HOST="localhost"
+prod-DB_HOST="production.db.host"
+DB_DATABASE="project-dev"
+prod-DB_DATABASE="project-prod"
+DB_USERNAME=user
+DB_PASSWORD=password
 ```
