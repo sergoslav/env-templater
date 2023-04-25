@@ -1,0 +1,12 @@
+configs:
+  removeExtraEnv: true
+
+environment:
+  - name: dev
+    replacers:
+      db-host: "localhost"
+      container-postfix: ""
+  - name: debug
+    replacers:
+      db-host: "debughost"
+      container-postfix: "-debug"

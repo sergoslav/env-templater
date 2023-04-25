@@ -1,13 +1,24 @@
 # env-templater
 ### Tool to make .env file use template.
 
-This program takes three arguments from the command line:
+This program takes four arguments from the command line:
 
-- `source_file` - the name of the source .env file.
-- `dest_file` - the name of the new file that will be created or overwritten.
-- `prefix` - the prefix to remove from lines starting with this prefix.
+```
+  -c string
+        templater config .yaml file (default ".env-templater.yaml")
+  -d string
+        the name of the new file that will be created or overwritten. (default ".env")
+  -e string
+        environment name (default "dev")
+  -s string
+        the name of the source .env file. (default ".env.template")
+```
 
-The program opens the source file and creates a new file. It then iterates over each line of the source file, checks if it starts with the specified prefix, removes that prefix from the line if present, and writes the modified line to the new file. After completing its work, the program reports that it has finished.
+The program opens the source file and creates a new file. And do one of action:
+
+- Removes line if it has prefix with one of env name but not currently used.
+- Remove prefix and insert this line if prefix currently used.
+- Does replace
 
 
 ## Go Install
@@ -17,31 +28,20 @@ go install github.com/sergoslav/env-templater@latest
 
 ## Usages Example
 
-Source `.env.template` file:
-```env
-APP_NAME="My App"
-#DB Contigurations
-dev-DB_HOST="localhost"
-prod-DB_HOST="production.db.host"
-dev-DB_DATABASE="project-dev"
-prod-DB_DATABASE="project-prod"
-DB_USERNAME=user
-DB_PASSWORD=password
-```
+[yaml config](./example/env-templater.yaml)
+
+[env template](./example/.env.template)
+
 
 Run:
 ```bash
-$ env-templater .env.template .env dev-
+$ env-templater -s example/.env.template -d example/.env.dev -e dev -c example/env-templater.yaml
 ```
+Result: [.env.dev](./example/.env.dev)
 
-Result `.env` file:
-```env
-APP_NAME="My App"
-#DB Contigurations
-DB_HOST="localhost"
-prod-DB_HOST="production.db.host"
-DB_DATABASE="project-dev"
-prod-DB_DATABASE="project-prod"
-DB_USERNAME=user
-DB_PASSWORD=password
+
+Run:
+```bash
+$ env-templater -s example/.env.template -d example/.env.debug -e debug -c example/env-templater.yaml
 ```
+Result: [.env.dev](./example/.env.debug)
